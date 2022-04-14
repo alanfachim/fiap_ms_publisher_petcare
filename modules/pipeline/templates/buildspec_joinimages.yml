@@ -1,0 +1,19 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto11 
+  pre_build:
+    commands:  
+      - cd .. 
+      - mv ./0*/**/*.json .
+      - ls  
+      - cat *.json >> 00/out.json 
+      - echo "[$(cat 00/out.json )]" >> 00/imagedefinitions.json 
+      - cd 00
+      - sed -i 's/},]/}]/' imagedefinitions.json
+      - ls
+      - cat imagedefinitions.json
+artifacts:
+  files: imagedefinitions.json 
