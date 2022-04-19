@@ -46,7 +46,7 @@ O microserviço de publicação deverá fazer pooling na SQS `https://sqs.sa-eas
 ### Conectores de saída
 O serviço enviará uma notificação 
 
-###Estrutura do microserviço `publicação`
+### Estrutura do microserviço `publicação`
  O microserviço de publicação foi construido seguindo o padrão de arquitetura hexagonal.
 
 >```
