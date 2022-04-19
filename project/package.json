@@ -1,0 +1,23 @@
+{
+  "name": "my-teste",
+  "version": "1.0.0",
+  "description": "apenas um teste",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alan",
+  "license": "ISC",
+  "dependencies": {
+    "amazon-dax-client": "^1.2.5",
+    "aws-sdk": "^2.989.0",
+    "fast-sort": "^3.0.2",
+    "ioredis": "^4.27.2",
+    "jsonschema": "^1.4.0",
+    "jsonwebtoken": "^8.5.1",
+    "node-fetch": "^2.6.1",
+    "object-hash": "^2.1.1",
+    "sleep": "^6.3.0",
+    "ws": "^7.4.3"
+  }
+}
