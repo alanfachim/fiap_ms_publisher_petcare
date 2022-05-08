@@ -46,33 +46,52 @@ O microserviço de publicação deverá fazer pooling na SQS `https://sqs.sa-eas
 ### Conectores de saída
 O serviço enviará uma notificação 
 
-### Estrutura do microserviço `publicação`
+###Estrutura do microserviço `publicação`
  O microserviço de publicação foi construido seguindo o padrão de arquitetura hexagonal.
 
 >```
 >project
 >│   README.md    
 >│
->└───App 
->    │    main.js
+>└App
+>    │    Index.ts
 >    |    package.json
->    │     
->    └───adapters
->    |    └───configuration
->    |    └───persistence
->    |          PublicationsRepository.js
->    |    
->    └───application
->    │     └───domain
->    |     |     Publication.js
->    │     └───port
->    │     |   └───income
->    |     |   |     PublishContent.js
->    │     |   └───outcome
->    |     |         NotifyContant.js
->    │     └───services
->    |           PublicationService.js 
->    │
->    └───test
->           PublicationsTest.js
+>    │   
+>    └src  
+>       └───adapters
+>       |    └───driven
+>       |    |     |   Repository.ts
+>       |    |     |   MockRepository.ts
+>       |    |     |    
+>       |    |     └───port
+>       |    |           Irepository.ts 
+>       |    └───driver
+>       |          Sqs.js
+>       |    
+>       └───application
+>       │     └───domain
+>       |     |     Publication.js
+>       |     |     User.js
+>       |     |     Location.js
+>       |     |     Assessment.js
+>       │     └───port
+>       │     |    IPublishService.ts
+>       │     └───services
+>       |           PublicationService.js 
+>       │
+>       └───test/use_cases
+>              PublicationsTest.spec.ts
+>              PublicationServiceTest.spec.ts
 >```
+
+# Executar testes unitários
+para executar os casos de teste do microserviço voce deverá executar o comando abaixo:
+>npm run test
+
+para executar o teste será necessário que o ambiente de execução contenha o Node.js instalado. Para visualização gráfica dos casos de teste será necessrário configuração da extenção Jasmine no VS Code. para detalhes da instalação acesse: https://marketplace.visualstudio.com/items?itemName=hbenl.vscode-jasmine-test-adapter
+
+
+##Executar o programa apontando para infra aws
+
+para executar o programa apontando para infra aws voce deverá executar o comando
+>npm run start
