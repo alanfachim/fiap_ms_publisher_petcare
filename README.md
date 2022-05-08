@@ -1,13 +1,13 @@
 # Introdução do MVP
 
-Com a crescente demanda no mercado nacional de pets, montamos uma iniciativa para explorar as necessidades inerentes a esse mercado. Desta forma a **PetCare** foi criada para ser uma aplicação multiplataforma de gerenciamento de serviços relacionados ao mundo Pet. Alguns exemplos de serviços abordados:
+Com a crescente demanda no mercado nacional de pets, montamos uma iniciativa para explorar as necessidades inerentes a esse mercado. Desta forma, a **PetCare** foi criada para ser uma aplicação multiplataforma de gerenciamento de serviços relacionados ao mundo Pet. Alguns exemplos de serviços abordados:
 > 1) Hospedagem de pets;
 > 2) Cuidados relacionados ao bem estar do pet;
 > 3) Serviço de adoção;
 
 ## Arquitetura geral da aplicação
 
-O serviço será sustentado pela plataforma de cloud da AWS, seguindo os padrões de microserviços. O desenho arquitetural dos componentes se apresentam da seguinte maneira:
+O serviço será sustentado pela plataforma de cloud da AWS, seguindo os padrões de microsserviços. O desenho arquitetural dos componentes se apresenta da seguinte maneira:
 
 <br><br>
 <p align="center">
@@ -16,10 +16,10 @@ O serviço será sustentado pela plataforma de cloud da AWS, seguindo os padrõe
    
 
 ***
-### Definição do domínio do microserviço `publicação`
+### Definição do domínio do microsserviço `publicação`
 
-O microserviço de publicação deverá ser responsável por persistir uma nova publicação no DynamoDB. Em sua porta de entrada ele deverá escutar mensagens do SQS e como lógica de negócio deverá identificar quais são os usuários relevantes para visualizar a publicação, e consequentemente deverá replicar a publicação para o cache (DynamoDB) de cada usuário do sistema. Após realizar a persistência, por meio de sua porta de saída, deverá notificar cada usuário relevante de três formas:
-1) Envio de email;
+O microsserviço de publicação deverá ser responsável por persistir uma nova publicação no DynamoDB. Em sua porta de entrada ele deverá escutar mensagens do SQS e como lógica de negócio deverá identificar quais são os usuários relevantes para visualizar a publicação, e consequentemente deverá replicar a publicação para o cache (DynamoDB) de cada usuário do sistema. Após realizar a persistência, por meio de sua porta de saída, deverá notificar cada usuário relevante de três formas:
+1) Envio de e-mail;
 2) Envio de mensagem via socket já aberto pelo cliente;
 3) Envio de notificação push (requisição Firebase);
    
@@ -31,7 +31,7 @@ A entidade publicação descreve alguns subtipos de publicação:
 3) Publicação de serviço;
 4) Publicação solicitação de um serviço;
    
-Em sua definação mais abstrata a publicação deverá conteplar os seguintes atributos:
+Em sua definição mais abstrata a publicação deverá contemplar os seguintes atributos:
 * Data e hora de publicação;
 * Tipo da publicação;
 * Código de identificação do proprietário da publicação;
@@ -42,15 +42,15 @@ Em sua definação mais abstrata a publicação deverá conteplar os seguintes a
 
 ### Conectores de Entrada
 
-O microserviço de publicação deverá fazer pooling na SQS `https://sqs.sa-east-1.amazonaws.com/*******/petcare-order-post.fifo`
+O microsserviço de publicação deverá fazer pooling na SQS `https://sqs.sa-east-1.amazonaws.com/*******/petcare-order-post.fifo`
 
 ### Conectores de saída
 
 O serviço enviará uma notificação.
 
-### Estrutura do microserviço `publicação`
+### Estrutura do microsserviço `publicação`
 
-O microserviço de publicação foi construido seguindo o padrão de arquitetura hexagonal.
+O microsserviço de publicação foi construído seguindo o padrão de arquitetura hexagonal.
 
 >```
 >project
@@ -92,13 +92,13 @@ O microserviço de publicação foi construido seguindo o padrão de arquitetura
 
 # Executar testes unitários
 
-Para executar os casos de teste do microserviço voce deverá executar o comando abaixo:
+Para executar os casos de teste do microsserviço você deverá executar o comando abaixo:
 >npm run test
 
-Para executar o teste será necessário que o ambiente de execução contenha o Node.js instalado. Para visualização gráfica dos casos de teste será necessário configuração da extenção Jasmine no VS Code. para detalhes da instalação acesse: https://marketplace.visualstudio.com/items?itemName=hbenl.vscode-jasmine-test-adapter
+Para executar o teste será necessário que o ambiente de execução contenha o Node.js instalado. Para visualização gráfica dos casos de teste será necessário configuração da extensão Jasmine no VS Code. Para detalhes da instalação acesse: https://marketplace.visualstudio.com/items?itemName=hbenl.vscode-jasmine-test-adapter
 
 
-## Executar o programa apontando para infra aws
+## Executar o programa apontando para infra AWS
 
-Para executar o programa apontando para infra aws voce deverá executar o comando:
+Para executar o programa apontando para infra AWS você deverá executar o comando:
 >npm run start
