@@ -66,9 +66,11 @@ O microsserviço de publicação foi construído seguindo o padrão de arquitetu
 >       |    └───driven
 >       |    |     |   MockRepository.ts
 >       |    |     |   Repository.ts
+>       |    |     |   Notify.ts
 >       |    |     |    
 >       |    |     └───ports
 >       |    |           IRepository.ts 
+>       |    |           INotify.ts 
 >       |    └───drivers
 >       |          Sqs.ts
 >       |    
@@ -80,12 +82,15 @@ O microsserviço de publicação foi construído seguindo o padrão de arquitetu
 >       |     |     User.ts
 >       │     └───port
 >       │     |    IPublishService.ts
+>       │     |    INotifyService.ts
 >       │     └───services
 >       |           PublicationService.ts 
+>       |           NotifyService.ts 
 >       │
 >       └───test/use_cases
 >              LocationTest.spec.ts
 >              PublicationServiceTest.spec.ts
+>              NotifyServiceTest.spec.ts 
 >              PublicationsTest.spec.ts
 >              UserTest.spec.ts
 >```
