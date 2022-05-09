@@ -1,6 +1,4 @@
-import { equal, deepEqual } from 'assert';
-import { PublicationService } from '../../application/services/PublicationService';
-import { MockRepository } from '../../adapters/driven/MockRepository';
+import { equal, deepEqual } from 'assert'; 
 import { Publication } from '../../application/domain/Publication';
 import { Location } from '../../application/domain/Location';
 import { Assessment } from '../../application/domain/Assessment';
@@ -18,7 +16,7 @@ describe('Testa regras da entidade  publicação', function () {
     });
 
 
-    it('Testa construção da entidade', async function () {
+    it('Testa construção da entidade de publicação', async function () {
         const publication = new Publication(1234, 1, 'teste', new Date(),
             'teste@teste.com', 'https://www.google.com/a', new User('teste@teste.com', 'https://www.google.com/a', 'Teste', assessments, new Location(1, 1)), 'teste', new Location(1, 1));
         equal(publication.id, 'teste@teste.com', "Id não é igual");

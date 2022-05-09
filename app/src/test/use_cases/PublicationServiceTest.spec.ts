@@ -5,6 +5,8 @@ import { Publication } from '../../application/domain/Publication';
 import { Location } from '../../application/domain/Location';
 import { Assessment } from '../../application/domain/Assessment';
 import { User } from '../../application/domain/User';
+import { MockNotify } from '../../adapters/driven/MockNotify';
+import { NotifyService } from '../../application/services/NotifyService';
 
 
 
@@ -14,7 +16,9 @@ describe('Testa serviço de publicação', function () {
     let publication1: Publication;
     beforeAll(() => {
         const db = new MockRepository();
-        publicationService = new PublicationService(db);
+        const notify = new MockNotify();
+        const svcnotify = new NotifyService(notify);
+        publicationService = new PublicationService(db,svcnotify);
         assessments = [
             new Assessment('teste2@teste.com', 'Teste2', 'teste teste', new Date(), 4.5),
             new Assessment('teste2@teste.com', 'Teste2', 'teste teste', new Date(), 4.5),

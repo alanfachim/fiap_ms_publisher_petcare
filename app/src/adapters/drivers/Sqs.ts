@@ -1,6 +1,8 @@
 import AWS, { SQS } from 'aws-sdk';
 import { Publication } from '../../application/domain/Publication';
+import { NotifyService } from '../../application/services/NotifyService';
 import { PublicationService } from '../../application/services/PublicationService';
+import { Notify } from '../driven/Notify';
 import { Repository } from '../driven/Repository';
 
 export class SqsActor {
@@ -34,10 +36,11 @@ export class SqsActor {
         //for each message implements drivens and services
         data!.Messages.forEach(async (message: { Body: any; ReceiptHandle: any; }) => {
           console.log(message.Body); 
-          const pub=Publication.fromJson(message.Body);
+          const pub=Publication.fromJson(message.Body); 
           console.log(pub);
           var db = new Repository();
-          new PublicationService(db).addPublication(pub);
+          const notify=new NotifyService(new Notify());
+          new PublicationService(db,notify).addPublication(pub);
           await this.removeFromQueue(message.ReceiptHandle);
         });
       }

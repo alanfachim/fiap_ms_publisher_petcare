@@ -1,10 +1,12 @@
  
+import { INotify } from '../../adapters/driven/ports/INotify';
 import { IRepository } from '../../adapters/driven/ports/IRepository';
 import { Publication } from '../domain/Publication';
+import { INotifyService } from '../port/INotifyService';
 import { IPublishService } from '../port/IPublishService';
 
 export class PublicationService implements IPublishService {
-    constructor(private db: IRepository) {
+    constructor(private db: IRepository, private svcnotify: INotifyService) { 
     }
 
     //processo para listar os usuários que possuem interesse em uma publicação
@@ -27,6 +29,7 @@ export class PublicationService implements IPublishService {
         const relevantUsersList = await this.findRelevantUsers(publication);
         relevantUsersList.forEach(async (user) => {
             await this.sendPublicationToFeed(publication, user);
+            await this.svcnotify.notify(user, 'Nova plublicação de seu interesse', publication.description); 
         });
         return true;
     }
