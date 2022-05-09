@@ -17,7 +17,7 @@ describe('Testa regras da entidade  localização', function () {
         const loc1 =  new Location(1, 1);
         const loc2 =  new Location(1, 1);
         const distance= loc1.distance(loc2);
-        equal(distance, 0, "Id não é igual");
+        equal(distance, 0, "Distância não é zero");
     });
  
 })
